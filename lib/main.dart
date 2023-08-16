@@ -50,7 +50,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   final TextEditingController firstNumController = TextEditingController();
   final TextEditingController secondNumController = TextEditingController();
-  int result = 0;
+  var result = 0;
 
   @override
   void dispose() {
@@ -60,11 +60,33 @@ class _MyHomePageState extends State<MyHomePage> {
     super.dispose();
   }
 
-  void addItems() {
+  void sumItems() {
     var sum = int.parse(firstNumController.text) +
         int.parse(secondNumController.text);
     setState(() {
       result = sum;
+    });
+  }
+
+  void subItems() {
+    var sub = int.parse(firstNumController.text) -
+        int.parse(secondNumController.text);
+    setState(() {
+      result = sub;
+    });
+  }
+
+  void divItems() {
+    var div = (int.parse(firstNumController.text) / int.parse(secondNumController.text)).floor();
+    setState(() {
+      result = div;
+    });
+  }
+
+  void multItems() {
+    var mult = (int.parse(firstNumController.text) * int.parse(secondNumController.text)).floor();
+    setState(() {
+      result = mult;
     });
   }
 
@@ -111,7 +133,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: ElevatedButton(
-                                onPressed: addItems,
+                                onPressed: sumItems,
                                 style: ButtonStyle(
                                   foregroundColor:
                                       MaterialStateProperty.all<Color>(
@@ -137,7 +159,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: ElevatedButton(
-                                onPressed: () {},
+                                onPressed: subItems,
                                 style: ButtonStyle(
                                   foregroundColor:
                                       MaterialStateProperty.all<Color>(
@@ -168,7 +190,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: ElevatedButton(
-                                onPressed: () {},
+                                onPressed: divItems,
                                 style: ButtonStyle(
                                   foregroundColor:
                                       MaterialStateProperty.all<Color>(
@@ -194,7 +216,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: ElevatedButton(
-                                onPressed: () {},
+                                onPressed: multItems,
                                 style: ButtonStyle(
                                   foregroundColor:
                                       MaterialStateProperty.all<Color>(
