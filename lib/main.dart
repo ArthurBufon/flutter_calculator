@@ -48,6 +48,26 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final TextEditingController firstNumController = TextEditingController();
+  final TextEditingController secondNumController = TextEditingController();
+  int result = 0;
+
+  @override
+  void dispose() {
+    // Clean up the controller when the widget is disposed.
+    firstNumController.dispose();
+    secondNumController.dispose();
+    super.dispose();
+  }
+
+  void addItems() {
+    var sum = int.parse(firstNumController.text) +
+        int.parse(secondNumController.text);
+    setState(() {
+      result = sum;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,36 +75,165 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            SizedBox(
-              width: MediaQuery.of(context).size.width * 1,
-              child: Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    children: [
-                      // Primeiro Número
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.3,
-                        child: const TextField(
-                          keyboardType: TextInputType.number
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 1,
+                child: Card(
+                  child: Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: Column(
+                      children: [
+                        // Primeiro Número
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.3,
+                          child: TextField(
+                            controller: firstNumController,
+                            keyboardType: TextInputType.number,
+                            style: const TextStyle(fontSize: 20),
+                          ),
                         ),
-                      ),
-                      // Segundo Número
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.3,
-                        child: const TextField(
-                          keyboardType: TextInputType.number
+                        // Segundo Número
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.3,
+                          child: TextField(
+                            controller: secondNumController,
+                            keyboardType: TextInputType.number,
+                            style: const TextStyle(fontSize: 20),
+                          ),
                         ),
-                      )
-                    ],
+                        const SizedBox(height: 30),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: ElevatedButton(
+                                onPressed: addItems,
+                                style: ButtonStyle(
+                                  foregroundColor:
+                                      MaterialStateProperty.all<Color>(
+                                          Colors.white),
+                                  backgroundColor:
+                                      MaterialStateProperty.all<Color>(
+                                          Colors.red),
+                                  shape: MaterialStateProperty.all<
+                                      RoundedRectangleBorder>(
+                                    RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(18),
+                                      side: BorderSide(
+                                          color: kColorScheme.primary),
+                                    ),
+                                  ),
+                                ),
+                                child: const Text(
+                                  '+',
+                                  style: TextStyle(fontSize: 30),
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: ElevatedButton(
+                                onPressed: () {},
+                                style: ButtonStyle(
+                                  foregroundColor:
+                                      MaterialStateProperty.all<Color>(
+                                          Colors.white),
+                                  backgroundColor:
+                                      MaterialStateProperty.all<Color>(
+                                          Colors.red),
+                                  shape: MaterialStateProperty.all<
+                                      RoundedRectangleBorder>(
+                                    RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(18),
+                                      side: BorderSide(
+                                          color: kColorScheme.primary),
+                                    ),
+                                  ),
+                                ),
+                                child: const Text(
+                                  '-',
+                                  style: TextStyle(fontSize: 30),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: ElevatedButton(
+                                onPressed: () {},
+                                style: ButtonStyle(
+                                  foregroundColor:
+                                      MaterialStateProperty.all<Color>(
+                                          Colors.white),
+                                  backgroundColor:
+                                      MaterialStateProperty.all<Color>(
+                                          Colors.red),
+                                  shape: MaterialStateProperty.all<
+                                      RoundedRectangleBorder>(
+                                    RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(18),
+                                      side: BorderSide(
+                                          color: kColorScheme.primary),
+                                    ),
+                                  ),
+                                ),
+                                child: const Text(
+                                  '/',
+                                  style: TextStyle(fontSize: 30),
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: ElevatedButton(
+                                onPressed: () {},
+                                style: ButtonStyle(
+                                  foregroundColor:
+                                      MaterialStateProperty.all<Color>(
+                                          Colors.white),
+                                  backgroundColor:
+                                      MaterialStateProperty.all<Color>(
+                                          Colors.red),
+                                  shape: MaterialStateProperty.all<
+                                      RoundedRectangleBorder>(
+                                    RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(18),
+                                      side: BorderSide(
+                                          color: kColorScheme.primary),
+                                    ),
+                                  ),
+                                ),
+                                child: const Text(
+                                  '*',
+                                  style: TextStyle(fontSize: 30),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                              'Resultado: $result',
+                              style: const TextStyle(fontSize: 25),
+                            )
+                          ],
+                        )
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            )
-          ],
+              )
+            ],
+          ),
         ),
       ),
     );
