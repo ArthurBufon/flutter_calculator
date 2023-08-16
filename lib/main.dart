@@ -241,11 +241,13 @@ class _MyHomePageState extends State<MyHomePage> {
                             ),
                           ],
                         ),
+                        const SizedBox(height: 40),
                         Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
                               'Resultado: $result',
-                              style: const TextStyle(fontSize: 25),
+                              style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                             )
                           ],
                         )
